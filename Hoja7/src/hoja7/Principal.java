@@ -21,9 +21,12 @@ public class Principal {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         // TODO code application logic here
-        entrada = new BufferedReader(new FileReader("cards.txt"));
+        BufferedReader entrada;
+		diccionario = new ArrayList<String>();
+		
+        entrada = new BufferedReader(new FileReader(""));
 		Scanner scaner = new Scanner(System.in);
 		 try{
                 while(entrada.ready()){
@@ -42,9 +45,9 @@ public class Principal {
                 }
 	}	
    
-        
-
     }
+}
+    
 
     
 
