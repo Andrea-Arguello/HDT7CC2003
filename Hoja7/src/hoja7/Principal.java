@@ -28,7 +28,7 @@ public class Principal {
         String source = "";
         ArrayList<String> diccionario;
         diccionario = new ArrayList<String>();
-        BinaryTree<String, String> dic  = new BinaryTree<String, String>();
+
         String textoTraducido = "";
 
         System.out.println("Bienvenido!\nSeleccione el archivo .TXT que contiene el Diccionario\n(presiona ENTER para continuar)");
@@ -86,4 +86,4 @@ public class Principal {
     }
     }
     
-}
+
