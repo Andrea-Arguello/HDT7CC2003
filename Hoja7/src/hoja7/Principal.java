@@ -23,14 +23,20 @@ public class Principal {
      */
     public static void main(String[] args) throws FileNotFoundException {
         // TODO code application logic here
+<<<<<<< HEAD
         BufferedReader entrada;
 	ArrayList<String> diccionario;
         diccionario = new ArrayList<String>();
+=======
+        BufferedReader entrada = new BufferedReader(new FileReader("diccionario.txt"));;
+	ArrayList diccionario = new ArrayList<>();
+>>>>>>> 6305834143148df3f1e1445a94792bbc7b3cd9e4
 		
         entrada = new BufferedReader(new FileReader(""));
-		Scanner scaner = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
 		 try{
                 while(entrada.ready()){
+<<<<<<< HEAD
                    
                     String strLine;
                      while ((strLine = entrada.readLine()) != null) {
@@ -43,6 +49,12 @@ public class Principal {
                     String[] partes = temp.split(", ");
                     //dic.insert(partes[0],partes[1]);
                 }
+=======
+                    String parts[] = entrada.readLine().split(",");
+                    String key = parts[0].toLowerCase().substring(1,parts[0].length());
+                    String value = parts[1].toLowerCase().substring(0,parts[0].length()-1);
+                    Association word = new Association(key,value); 
+>>>>>>> 6305834143148df3f1e1445a94792bbc7b3cd9e4
                 }
 
             }catch (IOException e) {
