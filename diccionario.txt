@@ -1,0 +1,11 @@
+(dog,perro)
+(house, casa)
+(bee,abeja)
+(homework,tarea)
+(man,hombre)
+(yes,si)
+(woman,mujer)
+(town,pueblo)
+(cat, gato)
+
+
