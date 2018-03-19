@@ -24,14 +24,25 @@ public class Principal {
     public static void main(String[] args) throws FileNotFoundException {
         // TODO code application logic here
         BufferedReader entrada;
-		diccionario = new ArrayList<String>();
+	ArrayList<String> diccionario;
+        diccionario = new ArrayList<String>();
 		
         entrada = new BufferedReader(new FileReader(""));
 		Scanner scaner = new Scanner(System.in);
 		 try{
                 while(entrada.ready()){
-                    String parts[] = entrada.readLine().split("|");
-                    
+                   
+                    String strLine;
+                     while ((strLine = entrada.readLine()) != null) {
+                    diccionario.add(strLine); //agregar cada linea al diccionario
+                }
+
+                /* Separar cadenas y hacer asociacion */
+                for (int i = 0; i < diccionario.size(); i++) {
+                    String temp = diccionario.get(i).substring(1, diccionario.get(i).length() - 1);
+                    String[] partes = temp.split(", ");
+                    //dic.insert(partes[0],partes[1]);
+                }
                 }
 
             }catch (IOException e) {
