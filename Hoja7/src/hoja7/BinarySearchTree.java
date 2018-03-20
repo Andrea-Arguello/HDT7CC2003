@@ -6,12 +6,12 @@ public class BinarySearchTree {
  
     // Constructor
     public BinarySearchTree() { 
-        root = null; 
+        this.root = null; 
     }
  
     // This method mainly calls insertRec()
     public void insert(Association key) {
-       root = insertRec(root, key);
+       this.root = insertRec(this.root, key);
     }
      
     /* A recursive function to insert a new key in BST */

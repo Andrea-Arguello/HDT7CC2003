@@ -36,16 +36,22 @@ public class Principal {
                 }
                 
                 while(txt.ready()){
-                    String[] oracion = txt.readLine().split("\\s+");
+                    System.out.println("Oracion a traducir:");
+                    String texto =txt.readLine();
+                    System.out.println(texto);
+                    String[] oracion = texto.split("\\s+");
+                    String traducida = "";
                     for(int i=0; i<oracion.length; i++){
                         Node busqueda = bst.buscar(oracion[i].toLowerCase());
                         if(busqueda==null){
-                            System.out.println(" *" + oracion[i] + "* ");
+                            traducida+=(" *" + oracion[i] + "* ");
                         }
                         else{
-                            System.out.println(busqueda.key.getValue() + " ");
+                            traducida+=(busqueda.key.getValue() + " ");
                         }
                     }
+                    System.out.println("Oracion traducida:");
+                    System.out.println(traducida);
                 }
                 
             }catch (IOException e) {
