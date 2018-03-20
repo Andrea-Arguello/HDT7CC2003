@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hoja7;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -54,7 +53,7 @@ public class BinarySearchTreeTest {
         BinarySearchTree bst = new BinarySearchTree();
         bst.insert(word);
         Node nodo = new Node(word);
-        assertEquals(bst.search(nodo,"hello").key.getValue(),bst.buscar("hello"));
+        assertEquals(bst.search(nodo,"hello").key.getValue(),"hola");
     }
     
 }
