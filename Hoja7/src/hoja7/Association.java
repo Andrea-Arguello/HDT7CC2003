@@ -1,40 +1,72 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package hoja7;
 
 import java.util.Map;
 
-/**
- *
- * @author cooli
- */
-public class Association<K,V> implements Map.Entry<K,V>{
-    protected K key;
-    protected V value;
-    
-    public Association(K key, V value){
-        this.key=key;
-        this.value=value;
-    }
-    
-    @Override
-    public K getKey() {
-        return key;
+
+
+
+public class Association<K extends Comparable<K>,V> implements Map.Entry<K,V>
+{
+  
+    protected K theKey; // the key of the key-value pair
+   
+    protected V theValue; // the value of the key-value pair
+
+  
+    public Association(K key, V value)
+    {
+        assert (key != null);
+        theKey = key;
+        theValue = value;
     }
 
-    @Override
-    public V getValue() {
-        return value;
+ 
+    public Association(K key)
+    {
+        this(key,null);
     }
 
-    @Override
-    public V setValue(V val) {
-        this.value=val;
-        return value;
+    public boolean equals(Object other)
+    {
+        Association otherAssoc = (Association)other;
+        return getKey().equals(otherAssoc.getKey());
     }
     
+  
+    public int hashCode()
+    {
+        return getKey().hashCode();
+    }
     
+ 
+    public V getValue()
+    {
+        return theValue;
+    }
+
+ 
+    public K getKey()
+    {
+        return theKey;
+    }
+
+ 
+    public V setValue(V value)
+    {
+        V oldValue = theValue;
+        theValue = value;
+        return oldValue;
+    }
+
+
+    public String toString()
+    {
+        StringBuffer s = new StringBuffer();
+        s.append(" - "+getKey()+": "+getValue()+"\n");
+        return s.toString();
+    }
+
+    public int compareTo(K key){
+        return this.theKey.compareTo(key);
+    }
+
 }
