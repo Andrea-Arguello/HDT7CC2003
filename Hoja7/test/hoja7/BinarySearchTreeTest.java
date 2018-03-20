@@ -53,7 +53,8 @@ public class BinarySearchTreeTest {
         Association word = new Association("hello","hola");
         BinarySearchTree bst = new BinarySearchTree();
         bst.insert(word);
-        bst.search(Node,"hello");
+        Node nodo = new Node(word);
+        assertEquals(bst.search(nodo,"hello").key.getValue(),bst.buscar("hello"));
     }
     
 }

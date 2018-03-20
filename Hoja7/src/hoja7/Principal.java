@@ -25,24 +25,36 @@ public class Principal {
         // TODO code application logic here
         BufferedReader entrada = new BufferedReader(new FileReader("diccionario.txt"));
         BinarySearchTree bst = new BinarySearchTree();
-		
-        entrada = new BufferedReader(new FileReader(""));
-		Scanner scan = new Scanner(System.in);
+	BufferedReader txt = new BufferedReader(new FileReader("texto.txt"));
 		 try{
                 while(entrada.ready()){
                     String parts[] = entrada.readLine().split(",");
-                    String key = parts[0].toLowerCase().substring(1,parts[0].length());
-                    String value = parts[1].toLowerCase().substring(0,parts[1].length()-1);
+                    String key = parts[0].substring(1,parts[0].length());
+                    String value = parts[1].substring(0,parts[1].length()-1);
                     Association word = new Association(key,value); 
                     bst.insert(word);
                 }
-
+                
+                while(txt.ready()){
+                    String[] oracion = txt.readLine().split("\\s+");
+                    for(int i=0; i<oracion.length; i++){
+                        Node busqueda = bst.buscar(oracion[i].toLowerCase());
+                        if(busqueda==null){
+                            System.out.println(" *" + oracion[i] + "* ");
+                        }
+                        else{
+                            System.out.println(busqueda.key.getValue() + " ");
+                        }
+                    }
+                }
+                
             }catch (IOException e) {
                 System.out.println("No se halla el archivo.");
 
             }finally{
                 try{
                     entrada.close();
+                    txt.close();
                 }
                 catch(IOException e){
                 }

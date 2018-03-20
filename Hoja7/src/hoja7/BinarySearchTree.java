@@ -1,18 +1,6 @@
 package hoja7;
 
 public class BinarySearchTree {
- 
-    /* Class containing left and right child of current node and key value*/
-    public class Node {
-        Association key;
-        Node left, right;
- 
-        public Node(Association item) {
-            key = item;
-            left = right = null;
-        }
-    }
- 
     // Root of BST
     Node root;
  
@@ -59,12 +47,18 @@ public class BinarySearchTree {
         }
     }
     
+    public Node buscar(String key){
+        Node nodo = root;
+        return search(nodo,key);
+    }
+    
     public Node search(Node root, String key)
     {
         // Base Cases: root is null or key is present at root
         if (root==null || root.key.getKey().equals(key))
             return root;
 
+        
         // val is greater than root's key
         if (((String)root.key.getKey()).compareTo((String)key)==1)
             return search(root.left, key);
