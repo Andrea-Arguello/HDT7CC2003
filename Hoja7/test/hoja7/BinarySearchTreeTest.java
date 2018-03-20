@@ -50,6 +50,10 @@ public class BinarySearchTreeTest {
      */
     @Test
     public void testSearch() {
+        Association word = new Association("hello","hola");
+        BinarySearchTree bst = new BinarySearchTree();
+        bst.insert(word);
+        bst.search(Node,"hello");
     }
     
 }
