@@ -48,9 +48,9 @@ public class BinarySearchTree {
     }
     
     public Node buscar(String key){
-        Node nodo = root;
-        return search(nodo,key);
+        return search(this.root,key);
     }
+    
     
     public Node search(Node root, String key)
     {
