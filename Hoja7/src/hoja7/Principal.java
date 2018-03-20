@@ -32,7 +32,7 @@ public class Principal {
                 while(entrada.ready()){
                     String parts[] = entrada.readLine().split(",");
                     String key = parts[0].toLowerCase().substring(1,parts[0].length());
-                    String value = parts[1].toLowerCase().substring(0,parts[0].length()-1);
+                    String value = parts[1].toLowerCase().substring(0,parts[1].length()-1);
                     Association word = new Association(key,value); 
                     bst.insert(word);
                 }
