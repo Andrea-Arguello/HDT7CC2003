@@ -3,68 +3,110 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hoja7;
 
-import java.util.Scanner;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import java.util.Scanner;
 import java.util.*;
 
-/**
- *
- * @author cooli
- */
-public class Principal {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws FileNotFoundException {
-        // TODO code application logic here
-        BufferedReader entrada = new BufferedReader(new FileReader("diccionario.txt"));
-        BinarySearchTree bst = new BinarySearchTree();
-	BufferedReader txt = new BufferedReader(new FileReader("texto.txt"));
-		 try{
-                while(entrada.ready()){
-                    String parts[] = entrada.readLine().split(",");
-                    String key = parts[0].substring(1,parts[0].length());
-                    String value = parts[1].substring(0,parts[1].length()-1);
-                    Association word = new Association(key,value); 
-                    bst.insert(word);
-                }
-                
-                while(txt.ready()){
-                    System.out.println("Oracion a traducir:");
-                    String texto =txt.readLine();
-                    System.out.println(texto);
-                    String[] oracion = texto.split("\\s+");
-                    String traducida = "";
-                    for(int i=0; i<oracion.length; i++){
-                        Node busqueda = bst.buscar(oracion[i].toLowerCase());
-                        if(busqueda==null){
-                            traducida+=(" *" + oracion[i] + "* ");
-                        }
-                        else{
-                            traducida+=(busqueda.key.getValue() + " ");
-                        }
-                    }
-                    System.out.println("Oracion traducida:");
-                    System.out.println(traducida);
-                }
-                
-            }catch (IOException e) {
-                System.out.println("No se halla el archivo.");
 
-            }finally{
-                try{
-                    entrada.close();
-                    txt.close();
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Scanner ingreso = new Scanner(System.in);
+        String source = "";
+        ArrayList<String> dictionary;
+        dictionary = new ArrayList<String>();
+        BinaryTree<String, String> dic  = new BinaryTree<String, String>();
+        String textoTraducido = "";
+
+        System.out.println("ESCOGER DICCIONARIO (ENTER)");
+        ingreso.nextLine();
+      
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new java.io.File("./src"));
+        chooser.setDialogTitle("Seleccione su archivo");
+        chooser.setFileFilter(new FileNameExtensionFilter("Text files (.txt)", "txt"));
+        int returnVal = chooser.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+            try {
+						/*Lee el archivo y obtiene la cadena*/
+                FileInputStream fstream = new FileInputStream(chooser.getSelectedFile().getAbsolutePath());
+                BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+                String strLine;
+                while ((strLine = br.readLine()) != null) {
+                    dictionary.add(strLine); //agregar cada linea al dictionary
                 }
-                catch(IOException e){
+
+               
+                for (int i = 0; i < dictionary.size(); i++) {
+                    String temp = dictionary.get(i).substring(1, dictionary.get(i).length() - 1);
+                    String[] partes = temp.split(", ");
+                    dic.insert(partes[0],partes[1]);
                 }
-	}	
-   
+            } catch (Exception e) {
+                System.out.println("Archivo no valido!!!");
+            }
+        }
+
+        /*abrir el texto*/
+        System.out.println("FRASE A TRADUCIR (ENTER)");
+        ingreso.nextLine();
+        JFileChooser chooser2 = new JFileChooser(System.getProperty("java.class.path"));
+        chooser2.setDialogTitle("ESCORGER ARCHIVO");
+        chooser2.setFileFilter(new FileNameExtensionFilter("Text files (.txt)", "txt"));
+        int returnVal2 = chooser2.showOpenDialog(null);
+        if(returnVal2 == JFileChooser.APPROVE_OPTION) {
+            try {
+                Scanner inputFile2 = new Scanner(new File(chooser2.getSelectedFile().getAbsolutePath()));
+                source = chooser2.getSelectedFile().getAbsolutePath();
+            }
+            catch (FileNotFoundException e) {
+                System.out.println("NULL");
+
+            }
+        }
+
+
+        try
+        {
+            BufferedReader datos = new BufferedReader(new FileReader(source));  // Abre documento 
+            String rawText = datos.readLine(); 
+            rawText = rawText.substring(0, rawText.length()-1);
+            String textoATraducir = rawText.toLowerCase();
+            datos.close();  // Se finaliza el lector
+            System.out.println("ORIGINAL\n" + textoATraducir);
+            String wIngles, wEspanol;
+            StringTokenizer st = new StringTokenizer (textoATraducir);
+
+            
+            /* traduce las palabras*/
+            while (st.hasMoreTokens())
+            {
+                wIngles = st.nextToken();
+                wEspanol = dic.find(wIngles);
+                if (wEspanol != null){
+                    textoTraducido = (textoTraducido +" "+ wEspanol);
+                }
+                else{
+                    textoTraducido = (textoTraducido + " *"+wIngles+"*");
+                }
+
+            }
+            System.out.println("   TRADUCCION \n");
+            textoTraducido = textoTraducido + ".";
+            System.out.println(textoTraducido);
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("ERROR");
+        }
+
+        dic.display(dic.root);
+
+
     }
 }
